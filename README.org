@@ -1,0 +1,38 @@
+#+TITLE: A simple deployment of moodle on openshift
+#+AUTHOR: James Blair
+#+DATE: <2024-06-12 Wed>
+
+
+[[https://en.wikipedia.org/wiki/Moodle][Moodle]] is a free and open-source learning management system written in PHP and distributed under the GNU General Public License. Moodle is used for blended learning, distance education, flipped classroom and other online learning projects in schools, universities, workplaces and other sectors.
+
+This repository is intended to be a walkthrough for deploying Moodle on OpenShift in a simple and basic way with minimal focus on extraneous features. I created this repository after struggling to find clear and simple guides for deploying Moodle on OpenShift.
+
+
+* Pre-requisites
+
+This guide assumes you have an OpenShift ~4.12+~ cluster already and have already logged into the cluster web console.
+
+
+* Step 1 - Create project
+
+For our first step let's create a new project to contain our upcoming deployment of Moodle.
+
+Copy the content from the code block below, then click the ➕ button in the top right hand corner of your OpenShift cluster, paste in the yaml then click "*Create*".
+
+#+begin_src yaml
+---
+kind: Project
+apiVersion: project.openshift.io/v1
+metadata:
+  name: moodle
+spec:
+  finalizers:
+    - kubernetes
+#+end_src
+
+
+* Step 2 - Deploy moodle via helm
+
+#+begin_src bash
+helm install moodle oci://registry-1.docker.io/bitnamicharts/moodle
+#+end_src
