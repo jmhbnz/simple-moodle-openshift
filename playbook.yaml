@@ -1,0 +1,11 @@
+---
+- name: Deploy chart
+  hosts: localhost
+  tasks:
+
+    - name: Deploy latest version of moodle chart inside chart-test namespace
+      kubernetes.core.helm:
+        name: moodle
+        chart_ref: oci://registry-1.docker.io/bitnamicharts/moodle
+        release_namespace: chart-test
+        create_namespace: true
