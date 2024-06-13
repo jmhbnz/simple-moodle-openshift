@@ -2,10 +2,6 @@
 - name: Deploy chart
   hosts: localhost
   tasks:
-    - name: Install curl (if not already installed)
-      package:
-        name: curl
-        state: present
 
     - name: Download Helm installation script
       get_url:
