@@ -15,12 +15,6 @@
         creates: /usr/local/bin/helm
       register: helm_install_result
       changed_when: false
-
-    - name: Add /usr/local/bin to PATH
-      lineinfile:
-        path: ~/.bashrc
-        line: 'export PATH=$PATH:/usr/local/bin'
-      when: helm_install_result.rc == 0
       
     - name: Deploy latest version of moodle chart inside chart-test namespace
       kubernetes.core.helm:
